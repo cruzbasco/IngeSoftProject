@@ -21,6 +21,7 @@ public class Cacho {
     Dado dado3 = new Dado();
     Dado dado4 = new Dado();
     Dado dado5 = new Dado();
+    int puntaje = 0;
     
     public Cacho() {
         cacho.add(dado1);
@@ -143,6 +144,18 @@ public class Cacho {
         else
             resultado = 50 * contarRepeticionesDe(5);
         return resultado;
+    }
+
+    public void sumarPuntaje() {
+        puntaje += calcularPuntaje();
+    }
+    
+    public boolean verificarSiExisteGanador()
+    {
+        if (puntaje >= 3000)
+            return true;
+        else
+            return false;
     }
     
     

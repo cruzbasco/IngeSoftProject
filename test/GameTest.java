@@ -15,7 +15,8 @@ public class GameTest {
     Cacho cacho;
     
     @Before
-    public void inicializar() {
+    public void inicializar() 
+    {
         dado = new Dado();
         cacho = new Cacho();
     }
@@ -111,13 +112,7 @@ public class GameTest {
         cacho.cargarDadosCon(1, 6, 2, 3, 4);
         assertEquals(100, cacho.calcularPuntaje());        
     }
-    
-    @Test
-    public void cuandoAcumulas3000oMasPuntosElJuegoTermina()
-    {
-        
-    }
-    
+     
     @Test
     public void porCadaDadoCincoQueSaqueSeSuma50Puntos()
     {
@@ -131,6 +126,22 @@ public class GameTest {
         assertEquals(50, cacho.calcularPuntaje());        
     }
     
+    @Test
+    public void cuandoAcumulas3000oMasPuntosElJuegoTermina()
+    {
+        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        cacho.sumarPuntaje();
+        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        cacho.sumarPuntaje();
+        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        cacho.sumarPuntaje();
+        assertTrue(cacho.verificarSiExisteGanador());
+    }
+    
+    
+    
+    
+    //private methods
     private boolean valorDeCincoDadosEstaEntreCincoYTreinta (int lanzamiento)
     {
         return ((lanzamiento >= 5) && (lanzamiento <= 30));
