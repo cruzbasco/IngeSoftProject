@@ -12,13 +12,19 @@ import java.util.Random;
  * @author cruzbasco
  */
 public class Dado {
-
-    Random numero = new Random();
+    int numero = 0;
+    Random random = new Random();
     public Dado() {
     }
 
     public int lanzar() {
-        return numero.nextInt(5)+1;
+        if (numero == 0)
+            numero = random.nextInt(6)+1;
+        return numero;
+    }
+
+    void cargarDadoCon(int d) {
+        numero = d;
     }
     
 }
