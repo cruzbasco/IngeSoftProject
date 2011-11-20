@@ -129,13 +129,22 @@ public class GameTest {
     @Test
     public void cuandoAcumulas3000oMasPuntosElJuegoTermina()
     {
-        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        cacho.cargarDadosCon(1, 1, 1, 1, 1); //1200 puntos
         cacho.sumarPuntaje();
-        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        assertFalse(cacho.verificarSiExisteGanador());
+        cacho.cargarDadosCon(1, 1, 1, 1, 1); //2400 puntos
         cacho.sumarPuntaje();
-        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        assertFalse(cacho.verificarSiExisteGanador());
+        cacho.cargarDadosCon(2, 2, 6, 6, 6); //3000 puntos
         cacho.sumarPuntaje();
         assertTrue(cacho.verificarSiExisteGanador());
+    }
+    
+    @Test
+    public void siAlLanzarLosDadosNoAlcanzasUnMinimoDe300PuntosSeAnota0Puntos()
+    {
+        cacho.cargarDadosCon(2, 2, 2, 2, 5);
+        assertEquals(0, cacho.verificarPuntajeMinimo());
     }
     
     

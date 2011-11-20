@@ -22,6 +22,7 @@ public class Cacho {
     Dado dado4 = new Dado();
     Dado dado5 = new Dado();
     int puntaje = 0;
+    int resultado;
     
     public Cacho() {
         cacho.add(dado1);
@@ -62,7 +63,7 @@ public class Cacho {
     }
     
     public int calcularPuntaje() {
-        int resultado = 0;
+         resultado = 0;
         resultado = reglasDeTrica()
                   + reglasIndividuales();
         return resultado;
@@ -129,7 +130,7 @@ public class Cacho {
     }
 
     private int reglaIndividualDeUnos() {
-        int resultado = 0;
+        resultado = 0;
         if (contarRepeticionesDe(1) >= 3)
             resultado = (100 * (contarRepeticionesDe(1) - 3));
         else
@@ -138,7 +139,7 @@ public class Cacho {
     }
 
     private int reglaIndividualDeCincos() {
-        int resultado = 0;
+        resultado = 0;
         if (contarRepeticionesDe(5) >= 3)
             resultado = (50 * (contarRepeticionesDe(5) - 3));
         else
@@ -156,6 +157,14 @@ public class Cacho {
             return true;
         else
             return false;
+    }
+    
+    public int verificarPuntajeMinimo()
+    {
+        sumarPuntaje();
+        if (puntaje < 300)
+            puntaje = 0;
+        return puntaje;
     }
     
     
