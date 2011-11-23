@@ -38,14 +38,6 @@ public class GameTest {
         assertTrue(( (lanzamiento1 + lanzamiento2) >= 2 ) && ( (lanzamiento1 + lanzamiento2) <= 12 ));
     }
     
-    // el cacho esta compuesto de 5 dados
-    @Test
-    public void laSumaDeLanzarElCachoRetornaUnValorEntreCincoYTreinta()
-    {
-        int lanzamiento = cacho.lanzarDados();
-        assertTrue(valorDeCincoDadosEstaEntreCincoYTreinta(lanzamiento));
-    }
-    
     //probando las reglas de los dados
     @Test 
     public void cargarElCachoConLosDadosQueYoQuiero()
@@ -135,7 +127,7 @@ public class GameTest {
         cacho.cargarDadosCon(1, 1, 1, 1, 1); //2400 puntos
         cacho.sumarPuntaje();
         assertFalse(cacho.verificarSiExisteGanador());
-        cacho.cargarDadosCon(2, 2, 6, 6, 6); //3000 puntos
+        cacho.cargarDadosCon(2, 3, 6, 6, 6); //3000 puntos
         cacho.sumarPuntaje();
         assertTrue(cacho.verificarSiExisteGanador());
     }
@@ -147,6 +139,42 @@ public class GameTest {
         assertEquals(0, cacho.verificarPuntajeMinimo());
     }
     
+    @Test
+    public void calcularLosDadosQueNoSumanPuntos()
+    {
+        cacho.cargarDadosCon(2, 2, 1, 6, 4);
+        assertEquals(4, cacho.calcularDadosNoUtilizados());
+        cacho.cargarDadosCon(1, 2, 3, 4, 5);
+        assertEquals(3, cacho.calcularDadosNoUtilizados());
+        cacho.cargarDadosCon(2, 2, 6, 6, 6);
+        assertEquals(2, cacho.calcularDadosNoUtilizados());
+        cacho.cargarDadosCon(2, 2, 3, 6, 4);
+        assertEquals(5, cacho.calcularDadosNoUtilizados());
+        cacho.cargarDadosCon(2, 2, 2, 1, 4);
+        assertEquals(1, cacho.calcularDadosNoUtilizados());
+        cacho.cargarDadosCon(2, 2, 2, 1, 1);
+        assertEquals(0, cacho.calcularDadosNoUtilizados());
+    }
+    
+    @Test
+    public void verificarSiHayDadosQueNoSumaronPuntos()
+    {
+        cacho.cargarDadosCon(4, 4, 4, 2, 3);  //400 puntos
+        assertTrue(cacho.verificarDadosNoUtilizados());
+        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        assertFalse(cacho.verificarDadosNoUtilizados());
+    }
+    
+    @Test
+    public void volverALanzarLosDadosQueNoSumaronPuntos()
+    {
+        cacho.cargarDadosCon(4, 4, 4, 2, 3);  //400 puntos
+        assertTrue(cacho.verificarDadosNoUtilizados());
+        cacho.sumarPuntaje();
+        assertEquals(2, cacho.calcularDadosNoUtilizados());
+        cacho.lanzarDados(cacho.calcularDadosNoUtilizados());
+        cacho.sumarPuntaje();
+    }
     
     
     

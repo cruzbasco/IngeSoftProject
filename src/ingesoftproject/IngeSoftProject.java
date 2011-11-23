@@ -4,6 +4,9 @@
  */
 package ingesoftproject;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 /**
  *
  * @author cruzbasco
@@ -14,13 +17,18 @@ public class IngeSoftProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Cacho cacho = new Cacho();
-        System.out.println(cacho.lanzarDados());
-        System.out.println(cacho.leerDadoNumero(0));
-        System.out.println(cacho.leerDadoNumero(1));
-        System.out.println(cacho.leerDadoNumero(2));
-        System.out.println(cacho.leerDadoNumero(3));
-        System.out.println(cacho.leerDadoNumero(4));
-
+        Cacho cacho1 = new Cacho();
+        Cacho cacho2 = new Cacho();
+        
+        
+        
     }
+    
+    public int menu() throws IOException{
+        System.out.println("1. Volver a lanzar.");
+        System.out.println("2. Anotar y pasar de turno.");
+        int opcion = (int)System.in.read();
+        return opcion;
+    }
+    
 }

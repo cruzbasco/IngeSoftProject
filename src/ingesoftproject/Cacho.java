@@ -1,6 +1,8 @@
 package ingesoftproject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /*
  * To change this template, choose Tools | Templates
@@ -14,56 +16,46 @@ import java.util.ArrayList;
 public class Cacho {
 
     ArrayList<Dado> cacho = new ArrayList<Dado>();
-    ArrayList<Integer> numerosCacho = new ArrayList<Integer>();
+    static List<Integer> numerosCacho = Arrays.asList(2,3,4,6);
 
-    Dado dado1 = new Dado();
-    Dado dado2 = new Dado();
-    Dado dado3 = new Dado();
-    Dado dado4 = new Dado();
-    Dado dado5 = new Dado();
     int puntaje = 0;
     int resultado;
     
     public Cacho() {
-        cacho.add(dado1);
-        cacho.add(dado2);
-        cacho.add(dado3);
-        cacho.add(dado4);
-        cacho.add(dado5);
+        cacho.add(new Dado());
+        cacho.add(new Dado());
+        cacho.add(new Dado());
+        cacho.add(new Dado());
+        cacho.add(new Dado());
     }
     
-    public int lanzarDados() {
-        int suma = 0;
-        for(Dado dado:cacho)
-        {
-            suma += dado.lanzar();
+    
+    
+    public void lanzarDados(int cantDados) {
+        ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
+        for (int i = 0; i < cantDados; i++) {
+            nuevoCacho.add(new Dado());
         }
-        return suma;
+        cacho = nuevoCacho;    
     }
 
     public void cargarDadosCon(int d1, int d2, int d3, int d4, int d5) {
         ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
         
-        dado1.cargarDadoCon(d1);
-        nuevoCacho.add(dado1);
-        dado2.cargarDadoCon(d2);
-        nuevoCacho.add(dado2);
-        dado3.cargarDadoCon(d3);
-        nuevoCacho.add(dado3);
-        dado4.cargarDadoCon(d4);
-        nuevoCacho.add(dado4);
-        dado5.cargarDadoCon(d5);
-        nuevoCacho.add(dado5);
+        nuevoCacho.add(new Dado(d1));
+        nuevoCacho.add(new Dado(d2));
+        nuevoCacho.add(new Dado(d3));
+        nuevoCacho.add(new Dado(d4));
+        nuevoCacho.add(new Dado(d5));
         cacho = nuevoCacho;
     }
     
     public int leerDadoNumero(int d) {   
-        dado1 = cacho.get(d);
-        return dado1.lanzar();
+        return cacho.get(d).lanzar();
     }
     
     public int calcularPuntaje() {
-         resultado = 0;
+        resultado = 0;
         resultado = reglasDeTrica()
                   + reglasIndividuales();
         return resultado;
@@ -167,6 +159,29 @@ public class Cacho {
         return puntaje;
     }
     
+    public int calcularDadosNoUtilizados()
+    {
+        int cont =0;
+        int repeticiones;
+        for (Integer numero : numerosCacho) {
+            repeticiones = contarRepeticionesDe(numero);
+            if (repeticiones < 3)
+                cont += repeticiones;
+        }
+        
+        return cont;
+    }
     
     
+    public boolean verificarDadosNoUtilizados()
+    {
+        if (calcularDadosNoUtilizados() == 0)
+            return false;
+        return true;
+    }
+            
+    public int devolverPuntaje()
+    {
+        return puntaje;
+    }
 }

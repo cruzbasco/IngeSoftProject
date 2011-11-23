@@ -16,15 +16,16 @@ public class Dado {
     Random random = new Random();
     public Dado() {
     }
+    
+    public Dado(int valorDado)
+    {
+        numero = valorDado;
+    }
 
     public int lanzar() {
         if (numero == 0)
             numero = random.nextInt(6)+1;
         return numero;
-    }
-
-    void cargarDadoCon(int d) {
-        numero = d;
     }
     
 }
