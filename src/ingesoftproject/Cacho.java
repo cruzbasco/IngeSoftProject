@@ -18,6 +18,7 @@ public class Cacho {
     ArrayList<Dado> cacho = new ArrayList<Dado>();
     static List<Integer> numerosCacho = Arrays.asList(2,3,4,6);
 
+    int cantidadDados;
     int puntaje = 0;
     int resultado;
     
@@ -32,10 +33,12 @@ public class Cacho {
     
     
     public void lanzarDados(int cantDados) {
+        cantidadDados = cantDados;
         ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
-        for (int i = 0; i < cantDados; i++) {
+        for (int i = 0; i < cantidadDados; i++) {
             nuevoCacho.add(new Dado());
         }
+        cacho.clear();
         cacho = nuevoCacho;    
     }
 
@@ -183,5 +186,15 @@ public class Cacho {
     public int devolverPuntaje()
     {
         return puntaje;
+    }
+    
+    public String mostrarCacho()
+    {
+        String resp =  "Dados: ";
+        for (int i = 0; i < cantidadDados; i++) {
+            resp += leerDadoNumero(i) + " ";
+        }   
+        resp += " Puntaje: " + devolverPuntaje();
+        return resp;
     }
 }

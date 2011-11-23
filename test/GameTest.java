@@ -166,10 +166,13 @@ public class GameTest {
     }
     
     @Test
-    public void volverALanzarLosDadosQueNoSumaronPuntos()
+    public void deberiaPoderVolverALanzarLosDadosQueNoSumaronPuntos()
     {
         cacho.cargarDadosCon(4, 4, 4, 2, 3);  //400 puntos
+        
         assertTrue(cacho.verificarDadosNoUtilizados());
+        
+        
         cacho.sumarPuntaje();
         assertEquals(2, cacho.calcularDadosNoUtilizados());
         cacho.lanzarDados(cacho.calcularDadosNoUtilizados());
