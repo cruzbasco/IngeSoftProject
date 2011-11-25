@@ -18,28 +18,39 @@ public class Cacho {
     ArrayList<Dado> cacho = new ArrayList<Dado>();
     static List<Integer> numerosCacho = Arrays.asList(2,3,4,6);
 
-    int cantidadDados;
+    int cantidadDados = 5;
     int puntaje = 0;
     int resultado;
     
     public Cacho() {
-        cacho.add(new Dado());
-        cacho.add(new Dado());
-        cacho.add(new Dado());
-        cacho.add(new Dado());
-        cacho.add(new Dado());
+        for (int i = 0; i < cantidadDados; i++) {
+            cacho.add(new Dado());
+        }
     }
     
     
     
-    public void lanzarDados(int cantDados) {
-        cantidadDados = cantDados;
+    public void lanzarDados() {
+        cantidadDados = calcularDadosNoUtilizados();
         ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
         for (int i = 0; i < cantidadDados; i++) {
             nuevoCacho.add(new Dado());
         }
         cacho.clear();
         cacho = nuevoCacho;    
+
+    }
+    
+    public void lanzarDados (int numero)
+    {
+        cantidadDados = numero;
+        ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
+        for (int i = 0; i < cantidadDados; i++) {
+            nuevoCacho.add(new Dado());
+        }
+        cacho.clear();
+        cacho = nuevoCacho;    
+
     }
 
     public void cargarDadosCon(int d1, int d2, int d3, int d4, int d5) {

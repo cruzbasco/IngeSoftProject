@@ -175,7 +175,7 @@ public class GameTest {
         
         cacho.sumarPuntaje();
         assertEquals(2, cacho.calcularDadosNoUtilizados());
-        cacho.lanzarDados(cacho.calcularDadosNoUtilizados());
+        cacho.lanzarDados();
         cacho.sumarPuntaje();
     }
     
