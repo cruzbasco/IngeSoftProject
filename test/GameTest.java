@@ -1,6 +1,5 @@
 
 
-import ingesoftproject.Juego;
 import ingesoftproject.Cacho;
 import ingesoftproject.Dado;
 import org.junit.Before;
@@ -14,14 +13,12 @@ import static org.junit.Assert.*;
 public class GameTest {
     Dado dado;
     Cacho cacho;
-    Juego juego;
     
     @Before
     public void inicializar() 
     {
         dado = new Dado();
         cacho = new Cacho();
-        juego = new Juego();
     }
     
     @Test
@@ -57,127 +54,132 @@ public class GameTest {
     public void siAlLanzarElCachoSalen3UnosVale1000Puntos()
     {
         cacho.cargarDadosCon(1, 1, 3, 4, 1);
-        assertEquals(1000, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(1000, cacho.calcularPuntaje());
     }
     
     @Test
     public void siAlLanzarElCachoSalen3SeisVale600Puntos()
     {
         cacho.cargarDadosCon(6, 2, 6, 6, 6);
-        assertEquals(600, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(600, cacho.calcularPuntaje());
     }
     
     @Test
     public void siAlLanzarElCachoSalen3CincosVale500Puntos()
     {
         cacho.cargarDadosCon(6, 5, 6, 5, 5);
-        assertEquals(500, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(500, cacho.calcularPuntaje());
     }
     
     @Test
     public void siAlLanzarElCachoSalen3CuatrosVale400Puntos()
     {
         cacho.cargarDadosCon(6, 4, 4, 2, 4);
-        assertEquals(400, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(400, cacho.calcularPuntaje());
     }
     
     @Test
     public void siAlLanzarElCachoSalen3TresVale300Puntos()
     {
         cacho.cargarDadosCon(3, 4, 4, 3, 3);
-        assertEquals(300, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(300, cacho.calcularPuntaje());
     }
     
     @Test
     public void siAlLanzarElCachoSalen3DosVale200Puntos()
     {
         cacho.cargarDadosCon(3, 2, 2, 2, 3);
-        assertEquals(200, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(200, cacho.calcularPuntaje());
     }
     
     @Test
     public void porCadaDadoUnoQueSaqueSeSuma100Puntos()
     {
         cacho.cargarDadosCon(1, 3, 1, 1, 1);
-        assertEquals(1100, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(1100, cacho.calcularPuntaje());
         cacho.cargarDadosCon(1, 1, 1, 1, 1);
-        assertEquals(1200, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(1200, cacho.calcularPuntaje());
         cacho.cargarDadosCon(1, 6, 6, 2, 1);
-        assertEquals(200, juego.calcularPuntaje(cacho.getCacho()));
+        assertEquals(200, cacho.calcularPuntaje());
         cacho.cargarDadosCon(1, 6, 2, 3, 4);
-        assertEquals(100, juego.calcularPuntaje(cacho.getCacho()));        
+        assertEquals(100, cacho.calcularPuntaje());        
     }
      
     @Test
     public void porCadaDadoCincoQueSaqueSeSuma50Puntos()
     {
         cacho.cargarDadosCon(5, 5, 5, 5, 5);
-        assertEquals(600, juego.calcularPuntaje(cacho.getCacho()));        
+        assertEquals(600, cacho.calcularPuntaje());        
         cacho.cargarDadosCon(3, 5, 5, 5, 5);
-        assertEquals(550, juego.calcularPuntaje(cacho.getCacho()));        
+        assertEquals(550, cacho.calcularPuntaje());        
         cacho.cargarDadosCon(2, 2, 3, 5, 5);
-        assertEquals(100, juego.calcularPuntaje(cacho.getCacho()));        
+        assertEquals(100, cacho.calcularPuntaje());        
         cacho.cargarDadosCon(5, 2, 6, 3, 4);
-        assertEquals(50, juego.calcularPuntaje(cacho.getCacho()));        
+        assertEquals(50, cacho.calcularPuntaje());        
     }
     
     @Test
     public void cuandoAcumulas3000oMasPuntosElJuegoTermina()
     {
         cacho.cargarDadosCon(1, 1, 1, 1, 1); //1200 puntos
-        cacho.setPuntaje(juego.sumarPuntaje(cacho.getPuntaje(),juego.calcularPuntaje(cacho.getCacho())));
-        assertFalse(juego.verificarSiExisteGanador(cacho.getPuntaje()));
+        cacho.sumarPuntaje();
+        assertFalse(cacho.verificarSiExisteGanador());
         cacho.cargarDadosCon(1, 1, 1, 1, 1); //2400 puntos
-        cacho.setPuntaje(juego.sumarPuntaje(cacho.getPuntaje(),juego.calcularPuntaje(cacho.getCacho())));
-        assertFalse(juego.verificarSiExisteGanador(cacho.getPuntaje()));
+        cacho.sumarPuntaje();
+        assertFalse(cacho.verificarSiExisteGanador());
         cacho.cargarDadosCon(2, 3, 6, 6, 6); //3000 puntos
-        cacho.setPuntaje(juego.sumarPuntaje(cacho.getPuntaje(),juego.calcularPuntaje(cacho.getCacho())));
-        assertTrue(juego.verificarSiExisteGanador(cacho.getPuntaje()));
+        cacho.sumarPuntaje();
+        assertTrue(cacho.verificarSiExisteGanador());
     }
     
     @Test
     public void siAlLanzarLosDadosNoAlcanzasUnMinimoDe300PuntosSeAnota0Puntos()
     {
-        cacho.cargarDadosCon(2, 2, 2, 4, 5);
-        assertFalse(juego.verificarPuntajeMinimoParaElPrimerLanzamiento(cacho.getCacho()));
+        cacho.cargarDadosCon(2, 2, 2, 2, 5);
+        assertEquals(0, cacho.verificarPuntajeMinimo());
     }
     
     @Test
     public void calcularLosDadosQueNoSumanPuntos()
     {
         cacho.cargarDadosCon(2, 2, 1, 6, 4);
-        assertEquals(4, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        assertEquals(4, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(1, 2, 3, 4, 5);
-        assertEquals(3, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        assertEquals(3, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(2, 2, 6, 6, 6);
-        assertEquals(2, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        assertEquals(2, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(2, 2, 3, 6, 4);
-        assertEquals(5, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        assertEquals(5, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(2, 2, 2, 1, 4);
-        assertEquals(1, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        assertEquals(1, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(2, 2, 2, 1, 1);
-        assertEquals(0, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        assertEquals(0, cacho.calcularDadosNoUtilizados());
     }
     
     @Test
     public void verificarSiHayDadosQueNoSumaronPuntos()
     {
         cacho.cargarDadosCon(4, 4, 4, 2, 3);  //400 puntos
-        assertTrue(juego.verificarDadosNoUtilizados(cacho.getCacho()));
+        assertTrue(cacho.verificarDadosNoUtilizados());
         cacho.cargarDadosCon(1, 1, 1, 1, 1);
-        assertFalse(juego.verificarDadosNoUtilizados(cacho.getCacho()));
+        assertFalse(cacho.verificarDadosNoUtilizados());
     }
     
-    /*@Test
+    @Test
     public void deberiaPoderVolverALanzarLosDadosQueNoSumaronPuntos()
     {
         cacho.cargarDadosCon(4, 4, 4, 2, 3);  //400 puntos
-        assertTrue(juego.verificarDadosNoUtilizados(cacho.getCacho())); 
-        cacho.setPuntaje(juego.sumarPuntaje(cacho.getPuntaje(),cacho.getCacho()));
-        assertEquals(2, juego.calcularDadosNoUtilizados(cacho.getCacho()));
+        
+        assertTrue(cacho.verificarDadosNoUtilizados());
+        
+        
+        cacho.sumarPuntaje();
+        assertEquals(2, cacho.calcularDadosNoUtilizados());
         cacho.lanzarDados();
-        cacho.setPuntaje(juego.sumarPuntaje(cacho.getPuntaje(),cacho.getCacho()));
-    }*/
+        cacho.sumarPuntaje();
+    }
+    
+    
     
     //private methods
     private boolean valorDeCincoDadosEstaEntreCincoYTreinta (int lanzamiento)
