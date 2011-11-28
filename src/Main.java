@@ -14,6 +14,8 @@ public class Main {
 
     static Cacho cacho1;
     static Cacho cacho2;
+    static int puntajeJugador1 = 0;    
+    static int puntajeJugador2 = 0;
     static int opcionMenu;
     private static boolean primerTurno;
     public static void main(String[] args) {
@@ -27,6 +29,7 @@ public class Main {
                 primerTurno = true;
                 if (!cacho1.verificarPuntajeMinimoEnPrimerLanzamiento())
                     cacho1.sumarPuntaje();
+                System.out.println("Puntaje Total: " + puntajeJugador1);
                 System.out.println(cacho1.mostrarCacho());
                 do{    
                     opcionMenu = menu();
@@ -37,25 +40,34 @@ public class Main {
                                 primerTurno = false;
                                 if(cacho1.verificarDadosNoUtilizados()){
                                     cacho1.lanzarDados();
+                                    System.out.println("Puntaje Total: " + puntajeJugador1);
                                     System.out.println(cacho1.mostrarCacho());
                                     if (!cacho1.verificarPuntajeEnLosSiguientesLanzamientos())
                                     {
                                         cacho1.sumarPuntaje();
                                     }else{
                                         System.out.println("No cumplio con la regla de 50 pts minimo durante el lanzamiento");
+                                        if(!cacho1.verificarDadosNoUtilizados())
+                                            puntajeJugador1 = cacho1.devolverPuntaje();
+                                        cacho1 = new Cacho();
                                         turno = false;
                                     }
                                 }else{
                                     System.out.println("No tienes mas dados para lanzar");
+                                    puntajeJugador1 = cacho1.devolverPuntaje();
                                     turno = false;
                                 }
                             }else{
                                 System.out.println("No Cumplio con la regla de 300 pts minimo en el primer lanzamiento");
+                                if(!cacho1.verificarDadosNoUtilizados())
+                                    puntajeJugador1 = cacho1.devolverPuntaje();
+                                cacho1 = new Cacho();
                                 turno = false;
                             }
                             break;
                         case 2:
                                 turno = false;
+                                puntajeJugador1 = cacho1.devolverPuntaje();
                             break;
                     }
                 }while (turno);
@@ -66,6 +78,7 @@ public class Main {
                 primerTurno = true;
                 if (!cacho2.verificarPuntajeMinimoEnPrimerLanzamiento())
                     cacho2.sumarPuntaje();
+                System.out.println("Puntaje Total: " + puntajeJugador2);
                 System.out.println(cacho2.mostrarCacho());
                 do{    
                     opcionMenu = menu();
@@ -76,28 +89,37 @@ public class Main {
                                 primerTurno = false;
                                 if(cacho2.verificarDadosNoUtilizados()){
                                     cacho2.lanzarDados();
+                                    System.out.println("Puntaje Total: " + puntajeJugador2);
                                     System.out.println(cacho2.mostrarCacho());
                                     if (!cacho2.verificarPuntajeEnLosSiguientesLanzamientos())
                                     {
                                         cacho2.sumarPuntaje();
                                     }else{
                                         System.out.println("No cumplio con la regla de 50 pts minimo durante el lanzamiento");
+                                        if(!cacho2.verificarDadosNoUtilizados())
+                                            puntajeJugador2 = cacho2.devolverPuntaje();
+                                        cacho2 = new Cacho();
                                         turno = true;
                                     }
                                 }else{
                                     System.out.println("No tienes mas dados para lanzar");
+                                    puntajeJugador2 = cacho2.devolverPuntaje();
                                     turno = true;
                                 }
                             }else{
                                 System.out.println("No Cumplio con la regla de 300 pts minimo en el primer lanzamiento");
+                                if(!cacho2.verificarDadosNoUtilizados())
+                                    puntajeJugador2 = cacho2.devolverPuntaje();
+                                cacho2 = new Cacho();
                                 turno = true;
                             }
                             break;
                         case 2:
                                 turno = true;
+                                puntajeJugador2 = cacho2.devolverPuntaje();
                             break;
                     }
-                }while (turno);
+                }while (!turno);
             }
         }
         
@@ -107,6 +129,7 @@ public class Main {
                 primerTurno = true;
                 if (!cacho1.verificarPuntajeMinimoEnPrimerLanzamiento())
                     cacho1.sumarPuntaje();
+                System.out.println("Puntaje Total: " + puntajeJugador1);
                 System.out.println(cacho1.mostrarCacho());
                 do{    
                     opcionMenu = menu();
@@ -117,25 +140,32 @@ public class Main {
                                 primerTurno = false;
                                 if(cacho1.verificarDadosNoUtilizados()){
                                     cacho1.lanzarDados();
+                                    System.out.println("Puntaje Total: " + puntajeJugador1);
                                     System.out.println(cacho1.mostrarCacho());
                                     if (!cacho1.verificarPuntajeEnLosSiguientesLanzamientos())
                                     {
                                         cacho1.sumarPuntaje();
                                     }else{
                                         System.out.println("No cumplio con la regla de 50 pts minimo durante el lanzamiento");
+                                        if(!cacho1.verificarDadosNoUtilizados())
+                                            puntajeJugador1 = cacho1.devolverPuntaje();
                                         turno = false;
                                     }
                                 }else{
                                     System.out.println("No tienes mas dados para lanzar");
+                                    puntajeJugador1 = cacho1.devolverPuntaje();
                                     turno = false;
                                 }
                             }else{
                                 System.out.println("No Cumplio con la regla de 300 pts minimo en el primer lanzamiento");
+                                if(!cacho1.verificarDadosNoUtilizados())
+                                    puntajeJugador1 = cacho1.devolverPuntaje();
                                 turno = false;
                             }
                             break;
                         case 2:
                                 turno = false;
+                                puntajeJugador1 = cacho1.devolverPuntaje();
                             break;
                     }
                 }while (turno);
@@ -146,6 +176,7 @@ public class Main {
                 primerTurno = true;
                 if (!cacho2.verificarPuntajeMinimoEnPrimerLanzamiento())
                     cacho2.sumarPuntaje();
+                System.out.println("Puntaje Total: " + puntajeJugador2);
                 System.out.println(cacho2.mostrarCacho());
                 do{    
                     opcionMenu = menu();
@@ -156,38 +187,45 @@ public class Main {
                                 primerTurno = false;
                                 if(cacho2.verificarDadosNoUtilizados()){
                                     cacho2.lanzarDados();
+                                    System.out.println("Puntaje Total: " + puntajeJugador2);
                                     System.out.println(cacho2.mostrarCacho());
                                     if (!cacho2.verificarPuntajeEnLosSiguientesLanzamientos())
                                     {
                                         cacho2.sumarPuntaje();
                                     }else{
                                         System.out.println("No cumplio con la regla de 50 pts minimo durante el lanzamiento");
+                                        if(!cacho2.verificarDadosNoUtilizados())
+                                            puntajeJugador2 = cacho2.devolverPuntaje();
                                         turno = false;
                                     }
                                 }else{
                                     System.out.println("No tienes mas dados para lanzar");
+                                    puntajeJugador2 = cacho2.devolverPuntaje();
                                     turno = false;
                                 }
                             }else{
                                 System.out.println("No Cumplio con la regla de 300 pts minimo en el primer lanzamiento");
+                                if(!cacho2.verificarDadosNoUtilizados())
+                                            puntajeJugador2 = cacho2.devolverPuntaje();
                                 turno = false;
                             }
                             break;
                         case 2:
                                 turno = false;
+                                puntajeJugador2 = cacho2.devolverPuntaje();
                             break;
                     }
                 }while (turno);
             }
         
-        if (cacho1.devolverPuntaje() == cacho2.devolverPuntaje()){
-            System.out.println("Partido empatado.. puntaje final: " + cacho1.devolverPuntaje());
+        if (puntajeJugador1 == puntajeJugador2){
+            System.out.println("Partido empatado.. puntaje final: " + puntajeJugador2);
             
         }else{
-            if (cacho1.devolverPuntaje() < cacho2.devolverPuntaje()){
-                System.out.println("Gano Jugador 2 con puntaje final: " + cacho2.devolverPuntaje());
+            if (puntajeJugador1 < puntajeJugador2){
+                System.out.println("Gano Jugador 2 con puntaje final: " + puntajeJugador2);
             }else{
-                System.out.println("Gano Jugador 1 con puntaje final: " + cacho1.devolverPuntaje());
+                System.out.println("Gano Jugador 1 con puntaje final: " + puntajeJugador1);
             }
                 
         }

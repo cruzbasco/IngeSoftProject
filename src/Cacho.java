@@ -77,15 +77,14 @@ public class Cacho {
         return regla.calcularPuntaje();
     }
 
-    public void sumarPuntaje() {
+    public int sumarPuntaje() {
         puntaje += regla.calcularPuntaje();
+        return puntaje;
     }
     
     public String mostrarCacho()
     {
-        String resp = "Puntaje inicial: " 
-                    + puntaje
-                    + "\nDados: ";
+        String resp = "Dados: ";
         for (int i = 0; i < cantidadDados; i++) {
             resp += leerDadoNumero(i) + " ";
         }   
