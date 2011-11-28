@@ -22,7 +22,7 @@ public class IngeSoftProject {
         while (!cacho1.verificarSiExisteGanador() && !cacho2.verificarSiExisteGanador()){
             if(turno){
                 System.out.println("Jugador 1");
-                cacho1.lanzarDados();
+                cacho1.lanzarDados(5);
                 cacho1.sumarPuntaje();
                 System.out.println(cacho1.mostrarCacho());
                 do{    
@@ -46,7 +46,7 @@ public class IngeSoftProject {
                     
             }else{
                 System.out.println("Jugador 2");
-                cacho2.lanzarDados();
+                cacho2.lanzarDados(5);
                 cacho2.sumarPuntaje();
                 System.out.println(cacho2.mostrarCacho());
                 do{

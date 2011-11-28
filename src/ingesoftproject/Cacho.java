@@ -22,6 +22,8 @@ public class Cacho {
     int puntaje = 0;
     int resultado;
     
+    Regla regla;
+    
     public Cacho() {
         for (int i = 0; i < cantidadDados; i++) {
             cacho.add(new Dado());
@@ -51,6 +53,16 @@ public class Cacho {
         cacho.clear();
         cacho = nuevoCacho;    
 
+    }
+    
+    public String mostrarCacho()
+    {
+        String resp = "Dados: ";
+        for (int i = 0; i < cantidadDados; i++) {
+            resp += leerDadoNumero(i) + " ";
+        }   
+        resp += " Puntaje: " + devolverPuntaje();
+        return resp;
     }
 
     public void cargarDadosCon(int d1, int d2, int d3, int d4, int d5) {
@@ -154,6 +166,8 @@ public class Cacho {
     }
 
     public void sumarPuntaje() {
+        regla = new Regla(cacho);
+        puntaje += regla.calcularPuntaje();
         puntaje += calcularPuntaje();
     }
     
@@ -199,13 +213,5 @@ public class Cacho {
         return puntaje;
     }
     
-    public String mostrarCacho()
-    {
-        String resp =  "Dados: ";
-        for (int i = 0; i < cantidadDados; i++) {
-            resp += leerDadoNumero(i) + " ";
-        }   
-        resp += " Puntaje: " + devolverPuntaje();
-        return resp;
-    }
+    
 }
