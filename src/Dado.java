@@ -1,4 +1,4 @@
-package ingesoftproject;
+
 
 import java.util.Random;
 
@@ -12,9 +12,10 @@ import java.util.Random;
  * @author cruzbasco
  */
 public class Dado {
-    private int numero = 0;
+    private int numero;
     Random random = new Random();
     public Dado() {
+        numero = random.nextInt(6) + 1;
     }
     
     public Dado(int valorDado)
@@ -23,8 +24,6 @@ public class Dado {
     }
 
     public int lanzar() {
-        if (numero == 0)
-            numero = random.nextInt(6) + 1; 
         return numero;
     }
     

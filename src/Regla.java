@@ -1,85 +1,33 @@
-package ingesoftproject;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author cruzbasco
  */
-public class Cacho {
-
-    ArrayList<Dado> cacho = new ArrayList<Dado>();
+public class Regla {
+    
+    private final ArrayList<Dado> cacho;
     static List<Integer> numerosCacho = Arrays.asList(2,3,4,6);
-
-    int cantidadDados = 5;
-    int puntaje = 0;
+    boolean resp;
     int resultado;
-    
-    Regla regla;
-    
-    public Cacho() {
-        for (int i = 0; i < cantidadDados; i++) {
-            cacho.add(new Dado());
-        }
-    }
-    
-    
-    
-    public void lanzarDados() {
-        cantidadDados = calcularDadosNoUtilizados();
-        ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
-        for (int i = 0; i < cantidadDados; i++) {
-            nuevoCacho.add(new Dado());
-        }
-        cacho.clear();
-        cacho = nuevoCacho;    
 
-    }
-    
-    public void lanzarDados (int numero)
-    {
-        cantidadDados = numero;
-        ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
-        for (int i = 0; i < cantidadDados; i++) {
-            nuevoCacho.add(new Dado());
-        }
-        cacho.clear();
-        cacho = nuevoCacho;    
-
-    }
-    
-    public String mostrarCacho()
-    {
-        String resp = "Dados: ";
-        for (int i = 0; i < cantidadDados; i++) {
-            resp += leerDadoNumero(i) + " ";
-        }   
-        resp += " Puntaje: " + devolverPuntaje();
-        return resp;
-    }
-
-    public void cargarDadosCon(int d1, int d2, int d3, int d4, int d5) {
-        ArrayList<Dado> nuevoCacho = new ArrayList<Dado>();
-        
-        nuevoCacho.add(new Dado(d1));
-        nuevoCacho.add(new Dado(d2));
-        nuevoCacho.add(new Dado(d3));
-        nuevoCacho.add(new Dado(d4));
-        nuevoCacho.add(new Dado(d5));
+    public Regla(ArrayList<Dado> nuevoCacho) {
         cacho = nuevoCacho;
     }
-    
-    public int leerDadoNumero(int d) {   
-        return cacho.get(d).lanzar();
+
+    public Regla() {
+        cacho = new ArrayList<Dado>();
     }
     
+
     public int calcularPuntaje() {
         resultado = 0;
         resultado = reglasDeTrica()
@@ -164,28 +112,8 @@ public class Cacho {
             resultado = 50 * contarRepeticionesDe(5);
         return resultado;
     }
+    
 
-    public void sumarPuntaje() {
-        regla = new Regla(cacho);
-        puntaje += regla.calcularPuntaje();
-        puntaje += calcularPuntaje();
-    }
-    
-    public boolean verificarSiExisteGanador()
-    {
-        if (puntaje >= 3000)
-            return true;
-        else
-            return false;
-    }
-    
-    public int verificarPuntajeMinimo()
-    {
-        sumarPuntaje();
-        if (puntaje < 300)
-            puntaje = 0;
-        return puntaje;
-    }
     
     public int calcularDadosNoUtilizados()
     {
@@ -193,25 +121,41 @@ public class Cacho {
         int repeticiones;
         for (Integer numero : numerosCacho) {
             repeticiones = contarRepeticionesDe(numero);
-            if (repeticiones < 3)
+            if (repeticiones >= 3)
+                cont += repeticiones - 3;
+            else
                 cont += repeticiones;
         }
         
         return cont;
     }
     
-    
-    public boolean verificarDadosNoUtilizados()
+    public boolean verificarPuntajeMinimoEnPrimerLanzamiento()
     {
-        if (calcularDadosNoUtilizados() == 0)
-            return false;
-        return true;
-    }
-            
-    public int devolverPuntaje()
-    {
-        return puntaje;
+        resp = false;
+        resultado = calcularPuntaje();
+        if (resultado < 300)
+            resp = true;
+        return resp;
     }
     
+    public boolean verificarPuntajeEnLosSiguientesLanzamientos()
+    {
+        resultado = calcularPuntaje();
+        if (resultado < 50)
+            resp = true;
+        return resp;
+    }
     
+    public int verificarSiTodosLosDadosSonIguales()
+    {
+        resultado =0;
+        int repeticiones;
+        for (int numero = 1; numero <= 6; numero++) {
+            repeticiones = contarRepeticionesDe(numero);
+            if (repeticiones == 5)
+                resultado = numero;
+        }
+        return resultado;
+    }
 }

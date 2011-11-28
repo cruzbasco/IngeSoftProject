@@ -10,6 +10,39 @@
 <project name="IngeSoftProject" default="default" basedir=".">
     <description>Builds, tests, and runs the project IngeSoftProject.</description>
     <import file="nbproject/build-impl.xml"/>
+	
+	<target name="execute" depends="compile">
+		<java classname="Main" classpath="build" />
+        <echo message="ejecutando el programa.." /> 
+
+	</target>
+
+	<target name="clean">
+		<delete dir="build" />
+        <echo message="eliminando la carpeta [build] " /> 
+	</target>
+
+	<target name="compile">
+	        <mkdir dir="build"/>
+	        <javac srcdir="src" destdir="build"/>
+	    </target>
+
+	    <target name="jar" depends="compile">
+	        <mkdir dir="build/jar"/>
+	        <jar destfile="build/jar/Juego3000.jar" basedir="build">
+	            <manifest>
+	                <attribute name="Main-Class" value="Main"/>
+	            </manifest>
+	        </jar>
+	    </target>
+
+	    <target name="run">
+	        <java jar="build/jar/Juego3000.jar" fork="true"/>
+	    </target>
+	
+	
+
+
     <!--
 
     There exist several targets which are by default empty and which can be 

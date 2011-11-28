@@ -1,7 +1,3 @@
-
-
-import ingesoftproject.Cacho;
-import ingesoftproject.Dado;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,12 +9,14 @@ import static org.junit.Assert.*;
 public class GameTest {
     Dado dado;
     Cacho cacho;
+    Regla regla;
     
     @Before
     public void inicializar() 
     {
         dado = new Dado();
         cacho = new Cacho();
+        regla = new Regla();
     }
     
     @Test
@@ -133,10 +131,21 @@ public class GameTest {
     }
     
     @Test
-    public void siAlLanzarLosDadosNoAlcanzasUnMinimoDe300PuntosSeAnota0Puntos()
+    public void siDuranteElPrimerLanzamientoDeDadosNoAlcanzasUnMinimoDe300PuntosSeAnota0Puntos()
     {
         cacho.cargarDadosCon(2, 2, 2, 2, 5);
-        assertEquals(0, cacho.verificarPuntajeMinimo());
+        assertTrue(cacho.verificarPuntajeMinimoEnPrimerLanzamiento());
+        cacho.cargarDadosCon(2, 2, 2, 1, 5);
+        assertFalse(cacho.verificarPuntajeMinimoEnPrimerLanzamiento());
+    }
+    
+    @Test
+    public void siDurantelosLanzamientosDeDadosSiguientesNoAlcanzasUnMinimoDe50PuntosSeAnota0Puntos()
+    {
+        cacho.cargarDadosCon(2, 2, 3, 4, 5);
+        assertFalse(cacho.verificarPuntajeEnLosSiguientesLanzamientos());
+        cacho.cargarDadosCon(2, 2, 3, 4, 4);
+        assertTrue(cacho.verificarPuntajeEnLosSiguientesLanzamientos());
     }
     
     @Test
@@ -146,7 +155,7 @@ public class GameTest {
         assertEquals(4, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(1, 2, 3, 4, 5);
         assertEquals(3, cacho.calcularDadosNoUtilizados());
-        cacho.cargarDadosCon(2, 2, 6, 6, 6);
+        cacho.cargarDadosCon(2, 2, 2, 4, 2);
         assertEquals(2, cacho.calcularDadosNoUtilizados());
         cacho.cargarDadosCon(2, 2, 3, 6, 4);
         assertEquals(5, cacho.calcularDadosNoUtilizados());
@@ -173,7 +182,20 @@ public class GameTest {
         assertTrue(cacho.verificarDadosNoUtilizados());
     }
     
-    
+    @Test
+    public void siTodosLosDadosSonIgualesTeRegresaElDadoRepetido()
+    {
+        cacho.cargarDadosCon(1, 1, 1, 1, 1);
+        assertEquals(1, cacho.verificarSiTodosLosDadosSonIguales());
+        cacho.cargarDadosCon(2, 2, 2, 2, 2);
+        assertEquals(2, cacho.verificarSiTodosLosDadosSonIguales());
+        cacho.cargarDadosCon(3, 3, 3, 3, 3);
+        assertEquals(3, cacho.verificarSiTodosLosDadosSonIguales());
+        cacho.cargarDadosCon(4, 4, 4, 4, 4);
+        assertEquals(4, cacho.verificarSiTodosLosDadosSonIguales());
+        cacho.cargarDadosCon(5, 5, 5, 5, 5);
+        assertEquals(5, cacho.verificarSiTodosLosDadosSonIguales());
+    }
     
     //private methods
     private boolean valorDeCincoDadosEstaEntreCincoYTreinta (int lanzamiento)
